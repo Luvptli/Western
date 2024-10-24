@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using TMPro;
 
 public class Temporizador : MonoBehaviour
 {
+
     [SerializeField]
     float time = 60;
 
@@ -13,44 +13,44 @@ public class Temporizador : MonoBehaviour
     TextMeshProUGUI labelTime;
 
     [SerializeField]
-    bool pantallaInicial;
+    bool estaJugando;
 
     [SerializeField]
-    bool juegoIniciado;
-
-    [SerializeField]
-    GameObject start;
+    GameObject pantallaInicial;
 
     [SerializeField]
     GameObject endScreen;
 
-    // Start is called before the first frame update
     void Start()
     {
         endScreen.SetActive(false);
-        start.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+        void Update()
     {
-        if (pantallaInicial==true)
+         if (pantallaInicial.activeSelf == false)
         {
-            BeginButton();
+            if (time > 0)
+            {
+                time -= Time.deltaTime;
+                labelTime.text = time.ToString();
+
+            }
+
+            else if (Time.deltaTime == 0)
+            {
+                time = 0;
+                labelTime.text = time.ToString();
+                endScreen.SetActive(true);
+            }
         }
-        else if (juegoIniciado == true)
+         if (endScreen.activeSelf==true)
         {
-            
+            RestartButton();
         }
     }
-
-    public void BeginButton()
+    public void RestartButton()
     {
-        start.SetActive(false);
-        time -= Time.deltaTime;
-        labelTime.text = time.ToString();
-        float segundos = Mathf.FloorToInt(time % 60);
-        labelTime.text = string.Format("00", segundos);
-        juegoIniciado = true;
+        endScreen.SetActive(false);
     }
 }

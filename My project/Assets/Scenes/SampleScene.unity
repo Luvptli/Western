@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -346,6 +345,7 @@ GameObject:
   - component: {fileID: 113350297}
   - component: {fileID: 113350299}
   - component: {fileID: 113350298}
+  - component: {fileID: 113350300}
   m_Layer: 5
   m_Name: RemainingTime
   m_TagString: Untagged
@@ -469,6 +469,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113350296}
   m_CullTransparentMesh: 1
+--- !u!114 &113350300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113350296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e30588cf5585ac419c234823bfbc78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 60
+  labelTime: {fileID: 113350298}
+  estaJugando: 0
+  pantallaInicial: {fileID: 1402777140}
+  endScreen: {fileID: 821373388}
 --- !u!1001 &172480083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1521,6 +1538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 450719742}
+  - component: {fileID: 450719743}
   m_Layer: 5
   m_Name: Targets
   m_TagString: Untagged
@@ -1566,6 +1584,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &450719743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450719741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b24103e84688bc458026b5f5bfeeeca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pantallaInicial: {fileID: 1402777140}
+  labelDinero: {fileID: 878964225}
+  dinero: 0
+  badGuy: {fileID: 1912979834}
+  estoyJugando: 0
 --- !u!1 &480818273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,8 +1760,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1402777142}
-        m_TargetAssemblyTypeName: Temporizador, Assembly-CSharp
-        m_MethodName: BeginButton
+        m_TargetAssemblyTypeName: PantallaInicial, Assembly-CSharp
+        m_MethodName: BeginnButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2448,6 +2483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 821373389}
+  - component: {fileID: 821373390}
   m_Layer: 5
   m_Name: EndScreen
   m_TagString: Untagged
@@ -2480,6 +2516,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &821373390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821373388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa86d7f4a6f01748a2bda2945c3709f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pantallaFinal: 0
+  restart: {fileID: 821373388}
+  time: 0
 --- !u!1 &823588248
 GameObject:
   m_ObjectHideFlags: 0
@@ -4217,7 +4268,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1318331338}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 821373390}
+        m_TargetAssemblyTypeName: PantallaFinal, Assembly-CSharp
+        m_MethodName: RestartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1318331338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4598,15 +4661,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1402777140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b881844b68f7d5549b1152deb07857ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e304463d557e5247a6f058a49dede2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 60
-  labelTime: {fileID: 113350298}
   pantallaInicial: 0
-  juegoIniciado: 0
   start: {fileID: 1402777140}
-  endScreen: {fileID: 821373388}
 --- !u!1001 &1414878231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5076,6 +5135,34 @@ PrefabInstance:
     - target: {fileID: 3394762290031110355, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
       propertyPath: m_Name
       value: BadGuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875908390163399403, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875908390163399403, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875908390163399403, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 450719743}
+    - target: {fileID: 3875908390163399403, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875908390163399403, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickBadGuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875908390163399403, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Jugadores, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875908390163399403, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5486372973818124141, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
       propertyPath: m_Pivot.x
@@ -5941,6 +6028,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817894941}
   m_CullTransparentMesh: 1
+--- !u!1 &1912979834 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3394762290031110355, guid: 57e2ed3523eeab5428b90886ed4740a1, type: 3}
+  m_PrefabInstance: {fileID: 1561434516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1938946649
 GameObject:
   m_ObjectHideFlags: 0
