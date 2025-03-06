@@ -33,11 +33,11 @@ public class Temporizador : MonoBehaviour
             if (time > 0)
             {
                 time -= Time.deltaTime;
-                labelTime.text = time.ToString();
+                labelTime.text = Mathf.FloorToInt(time).ToString();
 
             }
 
-            else if (Time.deltaTime == 0)
+            else if (Time.deltaTime <= 0)
             {
                 time = 0;
                 labelTime.text = time.ToString();
